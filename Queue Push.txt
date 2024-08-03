@@ -1,0 +1,5 @@
+sqs :
+1. Configure AWS CLI
+2. aws sqs list-queues
+3. aws sqs send-message --queue-url https://sqs.us-east-1.amazonaws.com/975050064793/TaskQueues --message-body '{"taskId":"124"
+,"taskName":"Sample Task2"}' --delay-seconds 10 --region us-east-1
