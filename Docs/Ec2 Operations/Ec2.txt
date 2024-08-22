@@ -1,0 +1,46 @@
+# Create a ec2 and connect to it
+ssh -i "test001.pem" ec2-user@ec2-52-3-220-60.compute-1.amazonaws.com
+
+#Install Git if it’s not already installed:
+
+sudo yum install git -y
+
+#Navigate to your preferred directory:
+cd /home/ec2-user
+
+#Clone your GitHub repository (replace with your repository URL):
+
+git clone https://github.com/yourusername/your-repo.git
+
+cd Serverless_capstone
+
+sudo yum install -y nginx
+
+sudo systemctl start nginx
+sudo systemctl enable nginx
+sudo vim /etc/nginx/nginx.conf
+
+
+####################################
+update the conf file 
+#################################
+server {
+    listen 80;
+    server_name _;  # Use underscore as a wildcard
+
+    root /home/ec2-user/Serverless_capstone;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+
+
+#Ensure Nginx can read the files:
+
+
+sudo chown -R nginx:nginx /home/ec2-user/Serverless_capstone
+sudo chmod -R 755 /home/ec2-user/Serverless_capstone
+sudo systemctl restart nginx
+sudo systemctl status nginx

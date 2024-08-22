@@ -1,0 +1,18 @@
+
+******************************************************************
+AWS CLI COMMON COMMANDS TO CONFIGURE PROFILE
+******************************************************************
+
+1. Create a profile :  aws configure --profile "name"
+2. Get detials of current profile : aws configure list
+3. Get list of avaialble profiles : aws configure list-profiles
+4. How to Remove/Update a profile details : 		
+		notepad %userprofile%\.aws\config
+		notepad %userprofile%\.aws\credentials
+5. Change the current profile : set AWS_PROFILE='name'
+6. Create a SSO Session : aws configure sso
+6. Refresh the SSO session token : aws sso login 
+7. To change default region :  aws configure set region your_desired_region
+
+
+

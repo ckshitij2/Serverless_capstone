@@ -1,0 +1,47 @@
+
+_____________________________________________________________________________
+
+            ROLE NAME : lambda_task_getter_role
+_______________________________________________________________________________
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "lambda.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+
+
+
+________________________________________________________________________________________________________________________________________
+        Create a Custom IAM Policy for SQS and DynamoDB: lambda_task_getter_custom_policy
+________________________________________________________________________________________________________________________________________
+
+
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": [
+				"dynamodb:Scan",
+				"dynamodb:PutItem"
+			],
+			"Resource": "arn:aws:dynamodb:ap-south-1:419526246250:table/employee_tasks"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"logs:CreateLogGroup",
+				"logs:CreateLogStream",
+				"logs:PutLogEvents"
+			],
+			"Resource": "*"
+		}
+	]
+}

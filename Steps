@@ -1,0 +1,32 @@
+REGION : AP-SOUTH-1
+_____________________________________________________________________________
+    PUSH TASK TO DYNAMO DB TABLE
+_____________________________________________________________________________
+
+
+1. SET UP AWS CLI WITH YOUR AWS ACCOUNT
+2. SET UP A FIFO SQS QUEUE  -- NAME : task_ingester_queue.fifo
+3. FOLLOW Queue Push.txt commands to publish tasks to Queue
+4. CREATE A DYNAMO DB TABLE (employee_tasks) WITH taskId as primary key
+    -> Either go to the console 
+    -> CLI COMMAND: 
+        aws dynamodb create-table ^
+        --table-name employee_tasks ^
+        --attribute-definitions AttributeName=taskId,AttributeType=S ^
+        --key-schema AttributeName=taskId,KeyType=HASH ^
+        --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 ^
+        --region ap-south-1
+
+4. CREATE A LAMBDA Function (lambda_task_loader) WHICH WILL PROCESS THE MESSAGE ONCE RECEIVED AND LOAD IT TO A DYNAMO DB TABLE USING lambda_task_loader.py file.
+5. SET UP A QUEUE TRIGGER WHICH WILL PASS THE MESSAGE TO LAMBDA AND THEN LAMBDA WILL  LOAD IT TO A DYNAMO DB TABLE 
+6. CREATE SNS TOPIC task_loader_topic for all the SNS ALERTS
+
+
+_____________________________________________________________________________
+    CREATE A REST API TO FETCH THE EXISITNG LIST OF RECORDS
+_____________________________________________________________________________
+
+1. Create the Lambda Function (lambda_task_getter): This Lambda function will be triggered by the API Gateway to fetch all tasks from the DynamoDB table.
+2. CREATE A REST API (employee_tasks_rest_api) 
+    --> Must have one stage deployed : prod
+    --> Must be associated with a usage plan and API KEY
