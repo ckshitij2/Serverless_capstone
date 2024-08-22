@@ -1,11 +1,12 @@
 // Define the API URL as a variable
-const API_URL = 'https://27ox4e757g.execute-api.us-east-1.amazonaws.com/prod/task'; // Replace with your actual API Gateway URL
+const API_URL = 'https://9lzyamugrl.execute-api.ap-south-1.amazonaws.com/prod/tasks'; // Replace with your actual API Gateway URL
 
 document.addEventListener('DOMContentLoaded', () => {
     const taskList = document.getElementById('taskList');
     const taskForm = document.getElementById('taskForm');
     const taskIdInput = document.getElementById('taskId');
     const taskNameInput = document.getElementById('taskName');
+    const taskOwnerInput = document.getElementById('taskOwner');
 
     // Function to fetch and display tasks
     async function fetchTasks() {
@@ -14,15 +15,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
+                    'x-api-key': 'X8TnD3EWqI8BskW1BuBxe2n1LeseuViOaE9a07VY'
                 },
             });
-            console.log(response)
+
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
+
             const tasks = await response.json();
-            
-            // Debugging: log the tasks object
             console.log('Fetched tasks:', tasks);
 
             // Clear the task list
@@ -35,12 +36,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 Object.keys(taskItems).forEach(key => {
                     const task = taskItems[key];
-                    console.log('Task:', task);
-                    console.log(`Task ID: ${task.taskId}, Task Name: ${task.taskName}`);
 
+                    // Create a container for the task details
                     const taskItem = document.createElement('div');
                     taskItem.className = 'task-item';
-                    taskItem.textContent = `ID: ${task.taskId}, Name: ${task.taskName}`;
+
+                    // Add task ID
+                    const taskIdElement = document.createElement('div');
+                    taskIdElement.className = 'task-id';
+                    taskIdElement.textContent = `ID: ${task.taskId}`;
+                    taskItem.appendChild(taskIdElement);
+
+                    // Add task name
+                    const taskNameElement = document.createElement('div');
+                    taskNameElement.className = 'task-name';
+                    taskNameElement.textContent = `Name: ${task.taskName}`;
+                    taskItem.appendChild(taskNameElement);
+
+                    // Add task owner
+                    const taskOwnerElement = document.createElement('div');
+                    taskOwnerElement.className = 'task-owner';
+                    taskOwnerElement.textContent = `Owner: ${task.Task_Owner}`;
+                    taskItem.appendChild(taskOwnerElement);
+
                     taskList.appendChild(taskItem);
                 });
             } else {
@@ -56,28 +74,26 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         const taskId = taskIdInput.value;
         const taskName = taskNameInput.value;
-
-        // Debugging: log the task details before sending
-        console.log('Adding task:', { taskId, taskName });
+        const taskOwner = taskOwnerInput.value;
 
         try {
             const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'x-api-key': 'X8TnD3EWqI8BskW1BuBxe2n1LeseuViOaE9a07VY'
                 },
-                body: JSON.stringify({ taskId, taskName })
+                body: JSON.stringify({ taskId, taskName, taskOwner })
             });
-
-            // Debugging: log the response status and headers
-            console.log('POST response status:', response.status);
-            console.log('POST response headers:', response.headers);
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
+
             taskIdInput.value = '';
             taskNameInput.value = '';
+            taskOwnerInput.value = '';
+
             fetchTasks(); // Refresh the task list
         } catch (error) {
             console.error('Error adding task:', error);

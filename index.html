@@ -5,15 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Manager</title>
     <link rel="stylesheet" href="styles.css">
-
 </head>
 <body>
-    <div id="taskList"></div>
-    <form id="taskForm">
-        <input type="text" id="taskId" placeholder="Enter task ID" required>
-        <input type="text" id="taskName" placeholder="Enter task name" required>
-        <button type="submit">Add Task</button>
-    </form>
+    <div class="container">
+        <h1>Task Manager</h1>
+        <div id="taskList"></div>
+        <form id="taskForm">
+            <div class="input-group">
+                <input type="text" id="taskId" placeholder="Task ID" required>
+            </div>
+            <div class="input-group">
+                <input type="text" id="taskName" placeholder="Task Name" required>
+            </div>
+            <div class="input-group">
+                <input type="text" id="taskOwner" placeholder="Task Owner" required>
+            </div>
+            <button type="submit">Add Task</button>
+        </form>
+    </div>
     <script src="app.js"></script>
 </body>
 </html>
