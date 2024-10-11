@@ -51,9 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Add task owner
                     const taskOwnerElement = document.createElement('div');
                     taskOwnerElement.className = 'task-owner';
-                    taskOwnerElement.textContent = `Owner: ${task.Task_Owner}`;
+                    taskOwnerElement.textContent = `Owner: ${task.taskOwner}`;
                     taskItem.appendChild(taskOwnerElement);
-
                     taskList.appendChild(taskItem);
                 });
             } else {

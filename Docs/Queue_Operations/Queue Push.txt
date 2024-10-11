@@ -1,14 +1,10 @@
 sqs :
     1. Configure AWS CLI
     2. aws sqs list-queues
-    3. aws sqs send-message ^
-        --queue-url https://sqs.ap-south-1.amazonaws.com/419526246250/task_ingester_queue.fifo ^
-        --message-body "{\"taskId\":\"TEST010\",\"taskName\":\"Sample Task 1\",\"Task_Owner\":\"Kshitij Chauhan\"}" ^
-        --region ap-south-1 ^
-        --message-group-id "BATCH-A:TASKS"
-
-
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+    3. aws sqs send-message `  
+>>     --queue-url https://sqs.us-east-1.amazonaws.com/975050064793/task_ingester_queue `     
+>>     --message-body '{"taskId":"ITEMkc001","taskName":"Sample Task 1","taskOwner":"Kshitij Chauhan"}' ` 
+>>     --region us-east-1
 
 
 

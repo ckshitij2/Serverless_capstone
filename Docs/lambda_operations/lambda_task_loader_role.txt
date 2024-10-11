@@ -26,13 +26,13 @@ ________________________________________________________________________________
     "Version": "2012-10-17",
     "Statement": [
         {
-          "Effect": "Allow",
-          "Action": [
-            "logs:CreateLogGroup",
-            "logs:CreateLogStream",
-            "logs:PutLogEvents"
-          ],
-          "Resource": "*"
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "*"
         },
         {
             "Effect": "Allow",
@@ -41,7 +41,7 @@ ________________________________________________________________________________
                 "dynamodb:UpdateItem",
                 "dynamodb:BatchWriteItem"
             ],
-            "Resource": "arn:aws:dynamodb:ap-south-1:419526246250:table/employee_tasks"
+            "Resource": "arn:aws:dynamodb:us-east-1:975050064793:table/employee_tasks"
         },
         {
             "Effect": "Allow",
@@ -53,7 +53,7 @@ ________________________________________________________________________________
                 "sqs:ListQueueTags",
                 "sqs:GetQueueUrl"
             ],
-            "Resource": "arn:aws:sqs:ap-south-1:419526246250:task_ingester_queue.fifo"
+            "Resource": "arn:aws:sqs:us-east-1:975050064793:task_ingester_queue"
         }
     ]
 }
