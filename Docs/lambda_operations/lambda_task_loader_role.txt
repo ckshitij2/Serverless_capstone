@@ -41,7 +41,7 @@ ________________________________________________________________________________
                 "dynamodb:UpdateItem",
                 "dynamodb:BatchWriteItem"
             ],
-            "Resource": "arn:aws:dynamodb:us-east-1:975050064793:table/employee_tasks"
+            "Resource": "arn:aws:dynamodb:ap-south-1:975050064793:table/employee_tasks"
         },
         {
             "Effect": "Allow",
@@ -53,7 +53,7 @@ ________________________________________________________________________________
                 "sqs:ListQueueTags",
                 "sqs:GetQueueUrl"
             ],
-            "Resource": "arn:aws:sqs:us-east-1:975050064793:task_ingester_queue"
+            "Resource": "arn:aws:sqs:ap-south-1:975050064793:task_ingester_queue"
         }
     ]
 }

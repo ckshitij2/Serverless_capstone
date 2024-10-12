@@ -4,12 +4,12 @@ import os
 import re
 
 # Initialize the DynamoDB resource and SQS client
-dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
-sqs = boto3.client('sqs', region_name='us-east-1')
+dynamodb = boto3.resource('dynamodb', region_name='ap-south-1')
+sqs = boto3.client('sqs', region_name='ap-south-1')
 
 # Define the table name and SQS queue URL from environment variables
 TABLE_NAME = os.environ.get('TABLE_NAME', 'employee_tasks')
-QUEUE_URL = os.environ.get('QUEUE_URL', 'https://sqs.us-east-1.amazonaws.com/975050064793/task_ingester_queue')
+QUEUE_URL = os.environ.get('QUEUE_URL', 'https://sqs.ap-south-1.amazonaws.com/975050064793/task_ingester_queue')
 
 def lambda_handler(event, context):
     # Convert the event to a JSON string

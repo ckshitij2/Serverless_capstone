@@ -1,3 +1,4 @@
+/* General Page Styling */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -30,81 +31,30 @@ h1 {
     margin-bottom: 20px;
 }
 
+/* Task Item Styling with Hover Pop-Out Effect */
 .task-item {
-    padding: 15px;
-    margin-bottom: 15px;
-    background-color: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #e9ecef;
     border-radius: 8px;
-    border: 1px solid #e0e0e0;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-left: 5px solid #007bff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.task-item:hover {
-    background-color: #e9ecef;
-    transform: translateY(-2px);
-}
-
-form {
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.input-group {
-    margin-bottom: 15px;
-}
-
-.input-group:last-child {
-    margin-bottom: 0;
-}
-
-input[type="text"] {
-    width: calc(100% - 22px);
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-sizing: border-box;
-    font-size: 1rem;
-}
-
-button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    background-color: #007bff;
-    color: #ffffff;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-
-.task-item {
-    display: flex;
     flex-direction: column;
-    padding: 15px;
-    margin-bottom: 15px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Hover effect for Pop-Out */
 .task-item:hover {
-    background-color: #f9f9f9;
-    transform: translateY(-2px);
+    transform: scale(1.05); /* Makes the task "pop out" */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Adds a stronger shadow */
+    background-color: #ffffff; /* Slightly lighter background for emphasis */
+    border-left-color: #0056b3; /* Change border color on hover */
 }
 
+/* Task Item Details */
 .task-id, .task-name, .task-owner {
     font-size: 1rem;
     color: #333333;
@@ -125,4 +75,21 @@ button:hover {
     margin-bottom: 10px;
     color: #333333;
     font-size: 1.2rem;
+}
+
+/* Button Styling */
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #007bff;
+    color: #ffffff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
 }

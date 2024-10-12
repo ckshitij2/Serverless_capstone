@@ -19,7 +19,7 @@ def lambda_handler(event, context):
         'body': json.dumps(items),
         "headers": {
             "Access-Control-Allow-Origin": "*",  # Allow any origin
-            "Access-Control-Allow-Headers": "Content-Type",  # Allow specific headers
+            "Access-Control-Allow-Headers": "Content-Type, x-api-key",  # Allow specific headers
             "Access-Control-Allow-Methods": "OPTIONS,GET,POST"  # Allow specific methods
         }
     }

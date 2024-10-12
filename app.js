@@ -1,4 +1,4 @@
-const API_URL = 'https://9lzyamugrl.execute-api.ap-south-1.amazonaws.com/prod/tasks'; // Replace with your actual API Gateway URL
+const API_URL = 'https://aa78om3bbh.execute-api.ap-south-1.amazonaws.com/prod'; // Replace with your actual API Gateway URL
 
 document.addEventListener('DOMContentLoaded', () => {
     const taskList = document.getElementById('taskList');
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-api-key': 'X8TnD3EWqI8BskW1BuBxe2n1LeseuViOaE9a07VY'
+                    'x-api-key': 'lYWVn9g0mK2LmV7m7DmB4aRh6LjamEkFa74JIBx9'
                 },
             });
 

@@ -16,7 +16,7 @@ _____________________________________________________________________________
     --attribute-definitions AttributeName=taskId,AttributeType=S `
     --key-schema AttributeName=taskId,KeyType=HASH `
     --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 `
-    --region us-east-1
+    --region ap-south-1
 
 
 5. CREATE A LAMBDA Function (lambda_task_loader) WHICH WILL PROCESS THE MESSAGE ONCE RECEIVED AND LOAD IT TO A DYNAMO DB TABLE USING lambda_task_loader.py file.
@@ -32,3 +32,6 @@ _____________________________________________________________________________
 2. CREATE A REST API (employee_tasks_rest_api) 
     --> Must have one stage deployed : prod
     --> Must be associated with a usage plan and API KEY
+    --> method.response.header.Access-Control-Allow-Headers:'Content-Type, x-api-key'
+    --> method.response.header.Access-Control-Allow-Methods:'OPTIONS,GET,POST'
+    --> method.response.header.Access-Control-Allow-Origin:'*'
