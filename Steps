@@ -11,12 +11,13 @@ _____________________________________________________________________________
 4. CREATE A DYNAMO DB TABLE (employee_tasks) WITH taskId as primary key
     -> Either go to the console 
     -> CLI COMMAND: 
-        aws dynamodb create-table `
-    --table-name employee_tasks `
-    --attribute-definitions AttributeName=taskId,AttributeType=S `
-    --key-schema AttributeName=taskId,KeyType=HASH `
-    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 `
+        aws dynamodb create-table ^
+    --table-name employee_tasks ^
+    --attribute-definitions AttributeName=taskId,AttributeType=S ^
+    --key-schema AttributeName=taskId,KeyType=HASH ^
+    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 ^
     --region ap-south-1
+
 
 
 5. CREATE A LAMBDA Function (lambda_task_loader) WHICH WILL PROCESS THE MESSAGE ONCE RECEIVED AND LOAD IT TO A DYNAMO DB TABLE USING lambda_task_loader.py file.
