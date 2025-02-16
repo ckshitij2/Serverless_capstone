@@ -9,7 +9,10 @@ sqs = boto3.client('sqs', region_name='ap-south-1')
 
 # Define the table name and SQS queue URL from environment variables
 TABLE_NAME = os.environ.get('TABLE_NAME', 'employee_tasks')
-QUEUE_URL = os.environ.get('QUEUE_URL', 'https://sqs.ap-south-1.amazonaws.com/975050064793/task_ingester_queue')
+QUEUE_URL = os.environ.get('QUEUE_URL', 'https://sqs.ap-south-1.amazonaws.com/597088039179/task_ingester_queue')
+
+table = dynamodb.Table(TABLE_NAME)
+
 
 def lambda_handler(event, context):
     # Convert the event to a JSON string
@@ -26,8 +29,6 @@ def lambda_handler(event, context):
             'body': json.dumps('Error processing event.')
         }
 
-    # Initialize the DynamoDB table
-    table = dynamodb.Table(TABLE_NAME)
     
     # Loop through each record in the SQS event
     for record in event_dict['Records']:
@@ -36,44 +37,54 @@ def lambda_handler(event, context):
         print("####################################################")
         print(f"Raw message body: {message_body}")
         print("####################################################")
+        print(type(message_body))
+        print(json.loads(message_body))
+        task_item=json.loads(message_body)
         
-        # Convert the message body into a valid JSON string using regex
-        try:
+        # # Convert the message body into a valid JSON string using regex
+        # try:
 
 
-            # Adding quotes around keys and replacing values with quotes as needed
-            message_body = re.sub(r'([a-zA-Z0-9_]+):', r'"\1":', message_body)  # Add quotes around keys
-            message_body = message_body.replace("'", "\"")  # Replace single quotes with double quotes
+        #     # Adding quotes around keys and replacing values with quotes as needed
+        #     message_body = re.sub(r'([a-zA-Z0-9_]+):', r'"\1":', message_body)  # Add quotes around keys
+        #     message_body = message_body.replace("'", "\"")  # Replace single quotes with double quotes
             
-            # Fixing the value formatting to ensure they are quoted
-            message_body = re.sub(r':\s*([^,}]+)', r': "\1"', message_body)  # Ensure all values are quoted
-            message_body = re.sub(r':\s*("[^"]*")', r': \1', message_body)  # Don't double-quote already quoted values
+        #     # Fixing the value formatting to ensure they are quoted
+        #     message_body = re.sub(r':\s*([^,}]+)', r': "\1"', message_body)  # Ensure all values are quoted
+        #     message_body = re.sub(r':\s*("[^"]*")', r': \1', message_body)  # Don't double-quote already quoted values
 
-            message = json.loads(message_body)
-            print("******************************************")
-            print(f"Parsed message: {message}")
-            print("******************************************")
-        except json.JSONDecodeError as e:
-            print(f"Error parsing message: {e}")
-            continue  # Skip this record if there's an error in parsing
+        #     message = json.loads(message_body)
+        #     print("******************************************")
+        #     print(f"Parsed message: {message}")
+        #     print("******************************************")
+        # except json.JSONDecodeError as e:
+        #     print(f"Error parsing message: {e}")
+        #     continue  # Skip this record if there's an error in parsing
         
-        # Extract task details
-        task_id = message['taskId']
-        task_name = message['taskName']
-        task_owner = message['taskOwner']
+        # # Extract task details
+        # task_id = message['taskId']
+        # task_name = message['taskName']
+        # task_owner = message['taskOwner']
         
-        task_item = {
-            'taskId': task_id,
-            'taskName': task_name,
-            'taskOwner': task_owner
-        }
+        # task_item = {
+        #     'taskId': task_id,
+        #     'taskName': task_name,
+        #     'taskOwner': task_owner
+        # }
         
+        # Insert the item into DynamoDB
+        try:
+            response = table.put_item(Item=task_item)
+            print(f"Task added to DynamoDB table: {response}")
+        except Exception as e:
+            print(f"Error inserting item: {e}")
+
         #Add task to DynamoDB (uncomment when ready)
         try:
             table.put_item(Item=task_item)
-            print(f'Task added to DynamoDB table: {task_id}')
+            print(f'Task added to DynamoDB table: {task_item.taskId}')
         except Exception as e:
-            print(f'Error adding task {task_id} to DynamoDB table: {e}')
+            print(f'Error adding task {task_item.taskId} to DynamoDB table: {e}')
         
        
     

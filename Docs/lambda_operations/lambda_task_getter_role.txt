@@ -32,7 +32,7 @@ ________________________________________________________________________________
 				"dynamodb:Scan",
 				"dynamodb:PutItem"
 			],
-			"Resource": "arn:aws:dynamodb:ap-south-1:975050064793:table/employee_tasks"
+			"Resource": "arn:aws:dynamodb:ap-south-1:597088039179:table/employee_tasks"
 		},
 		{
 			"Effect": "Allow",

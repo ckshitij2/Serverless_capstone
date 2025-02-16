@@ -3,7 +3,7 @@ import boto3
 from boto3.dynamodb.conditions import Key, Attr
 
 # Initialize DynamoDB resource
-dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+dynamodb = boto3.resource('dynamodb', region_name='ap-south-1')
 table = dynamodb.Table('employee_tasks')
 
 def lambda_handler(event, context):
